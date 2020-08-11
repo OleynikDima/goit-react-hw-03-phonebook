@@ -4,6 +4,8 @@ import Section from './Section'
 import Form from './Form'
 import ContactsList from './Contacts'
 import ContactFilter from './Contacts/ContactFilter'
+import LocalStorage from './LocalSt'
+
 
 const shortid = require('shortid');
 
@@ -18,6 +20,7 @@ export default class App extends Component {
                 {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
                   ],
         filter:''
+        
     };
 // функция записывает input contacts in filter
     changeFilter = event => {
@@ -62,23 +65,18 @@ export default class App extends Component {
         })        
     }
 
-
+// life-circle get local sterage
 componentDidMount(){
-console.log('componentDidMount');
 const prevContacts = localStorage.getItem('contacts')
 if (prevContacts){
     this.setState({contacts:JSON.parse(prevContacts)})
 }
 }
-
+//add local storage 
 componentDidUpdate(prevState,prevProps){
-    console.log('componentDidUpdate');
-    console.log(this.state.contacts);
-
     if(prevState.contacts !== this.state.contacts){
         localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
     }
-
 }
 
     render (){
